@@ -1,0 +1,61 @@
+<!-- ============ GALLERY: fanned arc of photos, fed from the database ============ -->
+<section class="sec gallery on-deep" id="gallery" aria-labelledby="gallery-title">
+  <span class="wm gallery__wm" aria-hidden="true">gallery</span>
+  <div class="wrap gallery__head">
+    <div class="gallery__titles">
+      <p class="eyebrow">תיק עבודות</p>
+      <h2 class="h2" id="gallery-title"><span class="ln t-l">הגלריה</span><span class="ln t-b">של רחלי מן</span></h2>
+    </div>
+    <div class="gtabs" role="tablist" aria-label="סינון הגלריה לפי תחום" data-tabs="fan">
+      <button type="button" role="tab" aria-selected="true" data-filter="all">הכל<span class="gtabs__n" data-n="all"></span></button>
+      <button type="button" role="tab" aria-selected="false" data-filter="newborn">ניו בורן<span class="gtabs__n" data-n="newborn"></span></button>
+      <button type="button" role="tab" aria-selected="false" data-filter="outdoor">צילומי חוץ<span class="gtabs__n" data-n="outdoor"></span></button>
+      <button type="button" role="tab" aria-selected="false" data-filter="family">משפחה<span class="gtabs__n" data-n="family"></span></button>
+      <button type="button" role="tab" aria-selected="false" data-filter="studio">סטודיו<span class="gtabs__n" data-n="studio"></span></button>
+      <span class="gtabs__ink" aria-hidden="true"></span>
+    </div>
+  </div>
+
+  <div class="fan" id="fan" tabindex="0" aria-roledescription="קרוסלה" aria-label="תמונות מהגלריה. אפשר לדפדף בחצים" data-cursor="גררו">
+    <div class="fan__stage" id="fan-stage"></div>
+  </div>
+
+  <div class="wrap gallery__foot">
+    <button class="sqbtn" id="fan-prev" type="button" aria-label="התמונה הקודמת"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+    <div class="gallery__meta" aria-live="polite">
+      <span class="gallery__count" id="fan-count"></span>
+      <span class="gallery__cap" id="fan-cap"></span>
+    </div>
+    <button class="sqbtn" id="fan-next" type="button" aria-label="התמונה הבאה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6 6-6-6 6-6"/></svg></button>
+  </div>
+  <div class="wrap gallery__all">
+    <button class="dbtn" type="button" id="open-grid">
+      <span class="dbtn__label">לכל התמונות בגלריה</span>
+      <span class="dbtn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5"/><rect x="13.5" y="4" width="6.5" height="6.5"/><rect x="4" y="13.5" width="6.5" height="6.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5"/></svg></span>
+    </button>
+    <button type="button" class="dbtn admin-cta" data-admin-open="gallery"><span class="dbtn__label">העלאת תמונות לגלריה</span><span class="dbtn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button>
+  </div>
+</section>
+
+<!-- ============ PROCESS: a pinned deck of prints, one peels off per step ============ -->
+<section class="sec process" id="process" aria-labelledby="process-title">
+  <span class="wm process__wm" aria-hidden="true">process</span>
+  <div class="wrap process__grid">
+    <div class="process__text">
+      <span class="tag process__tag"><span class="tag__bg"></span><span class="tag__t">שלב אחר שלב</span></span>
+      <h2 class="h2" id="process-title"><span class="ln t-l">איך נראית</span><span class="ln t-b"><span class="hl"><span class="hl__bg"></span>חוויית הצילום</span></span><span class="ln t-l">שלנו?</span></h2>
+      <p class="process__p">ארבעה שלבים פשוטים, מהשיחה הראשונה ועד שהתמונות אצלכם ביד.</p>
+      <ol class="process__dots" aria-hidden="true"><li class="is-on"></li><li></li><li></li><li></li></ol>
+      <a class="dbtn" href="#contact">
+        <span class="dbtn__label">בואו נתחיל</span>
+        <span class="dbtn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6 6-6-6 6-6"/></svg></span>
+      </a>
+    </div>
+    <ol class="pstack" id="pstack">
+      <li class="pcard"><div class="pcard__in"><span class="pcard__num">01</span><h3>שיחת היכרות ותכנון</h3><p>נדבר בטלפון, נבין את הסגנון שאתם אוהבים, נתאים לוקיישן בירושלים או קונספט בסטודיו, ונתכונן יחד לפרטים הקטנים.</p></div><span class="vf__c"></span></li>
+      <li class="pcard"><div class="pcard__in"><span class="pcard__num">02</span><h3>יום הצילומים ברוגע</h3><p>נפגשים באווירה נינוחה ומחויכת. בלי לחץ של זמן, עם הכוונה עדינה וסבלנות אין-סופית, כדי להוציא מכם את המיטב.</p></div><span class="vf__c"></span></li>
+      <li class="pcard"><div class="pcard__in"><span class="pcard__num">03</span><h3>בחירה ועריכה מוקפדת</h3><p>אחרי הצילומים תקבלו גלריה לבחירה, וכל תמונה שתבחרו תעבור עיבוד אמנותי מדויק של צבע, אור וחדות.</p></div><span class="vf__c"></span></li>
+      <li class="pcard"><div class="pcard__in"><span class="pcard__num">04</span><h3>קבלת התמונות והאלבום</h3><p>התמונות המוכנות מגיעות אליכם באיכות גבוהה להדפסה ולשיתוף, עם אפשרות לעיצוב אלבום דיגיטלי יוקרתי. מזכרת לכל החיים.</p></div><span class="vf__c"></span></li>
+    </ol>
+  </div>
+</section>

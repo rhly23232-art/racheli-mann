@@ -1,0 +1,60 @@
+/* =========================================================
+   03 · HERO
+   ========================================================= */
+.hero{position:relative;padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px) + clamp(40px,6vw,96px));padding-bottom:clamp(90px,9vw,150px);overflow:clip;background:var(--cream)}
+.pattern--hero{opacity:.38}
+.hero__grid{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(40px,6vw,110px);align-items:center}
+.hero__text{display:flex;flex-direction:column;gap:clamp(20px,2.2vw,30px);min-width:0}
+.hero__title .ln{white-space:nowrap}
+.hero__title .t-b{color:var(--ink)}
+.hero__title .t-l{color:var(--ink)}
+
+/* inline logo shapes inside the headline */
+.sh{display:inline-block;vertical-align:middle;position:relative;top:-.06em}
+.sh-bars{display:inline-flex;align-items:flex-end;gap:.07em;height:.62em}
+.sh-bars i{display:block;width:.17em;border-radius:.04em;transform-origin:50% 100%}
+.sh-bars i:nth-child(1){height:78%;background:var(--mauve)}
+.sh-bars i:nth-child(2){height:100%;background:var(--taupe)}
+.sh-bars i:nth-child(3){height:78%;background:var(--sand)}
+.sh-sun{width:.52em;height:.52em;border-radius:50%;background:var(--sand);box-shadow:0 0 0 .09em rgba(182,166,151,.28)}
+.sh-pill{width:1.25em;height:.46em;border-radius:.23em;background:var(--mauve);transform-origin:100% 50%}
+
+.hero__lead{max-width:36ch;color:var(--muted)}
+.hero__lead b{color:var(--ink)}
+.hero__ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+.hero__facts{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:var(--fs-sm);color:var(--muted)}
+.hero__facts li{display:flex;align-items:center;gap:8px}
+.hero__facts svg{width:18px;height:18px;color:var(--mauve)}
+
+.hero__media{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;gap:26px}
+.hero__sun{position:absolute;top:-8%;left:-10%;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 40%,#EFE6DE,#E3D6CB 60%,rgba(227,214,203,0) 71%);z-index:0}
+.hero__frame{position:relative;z-index:1;width:100%;max-width:560px}
+.hero__ph{width:100%;aspect-ratio:4/5;max-width:100%}
+.hero__ph>img{transform:scale(1.1);transition:opacity 1.4s var(--ease),transform 1.4s var(--ease)}
+.hero__ph>img.is-in{opacity:0}
+.hero__ph>img.is-in.is-active{opacity:1;transform:scale(1);transition:opacity 1.4s var(--ease),transform 7.5s linear}
+.hero__stamp{position:absolute;z-index:5;top:-26px;right:-22px;width:74px;height:74px;display:grid;place-items:center;background:var(--cream);border:1.5px solid var(--ink);transform:rotate(9deg);color:var(--ink)}
+.hero__stamp .mark{transform:scale(1.35)}
+.hero__ctrl{display:flex;align-items:center;gap:14px}
+.hero__pause{width:34px;height:34px;display:grid;place-items:center;border:1.5px solid var(--ink);background:transparent;border-radius:50%}
+.hero__pause svg{width:14px;height:14px}
+.hero__dots{display:flex;gap:7px;align-items:center}
+.hero__dots button{width:9px;height:9px;padding:0;border-radius:9px;border:0;background:var(--line);transition:width .5s var(--ease),background-color .4s}
+.hero__dots button[aria-current="true"]{width:30px;background:var(--ink)}
+.hero__scroll{position:absolute;left:50%;bottom:clamp(20px,3vw,40px);z-index:2;width:46px;height:46px;margin-left:-23px;display:grid;place-items:center;border:1.5px solid var(--ink);color:var(--ink);transition:background-color .4s,color .4s}
+.hero__scroll svg{width:20px;height:20px;animation:nudge 2.2s var(--ease) infinite}
+.hero__scroll:hover{background:var(--ink);color:var(--cream)}
+@keyframes nudge{0%,100%{transform:translateY(-2px)}50%{transform:translateY(4px)}}
+
+@media (max-width:980px){
+  .hero__grid{grid-template-columns:1fr;gap:56px}
+  .hero__media{order:-1;max-width:520px;width:100%;margin-inline:auto}
+  .hero__ph{aspect-ratio:5/4}
+  .hero__scroll{display:none}
+}
+@media (max-width:560px){
+  .hero__title .ln{white-space:normal}
+  .hero__stamp{width:58px;height:58px;top:-18px;right:-8px}
+  .hero__stamp .mark{transform:scale(1.1)}
+  .hero__ph{aspect-ratio:4/4.4}
+}
