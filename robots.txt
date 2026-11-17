@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rhly23232-art.github.io/racheli-mann/sitemap.xml
