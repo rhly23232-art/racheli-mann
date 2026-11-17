@@ -934,6 +934,7 @@ textarea.fld__in{resize:vertical;min-height:96px;line-height:1.6}
 .login__p{font-size:15px;line-height:1.6;color:var(--muted)}
 .login__note{font-size:14px;min-height:1.4em;color:var(--muted)}
 .login__note.is-bad{color:var(--danger)}
+.login__hint{font-size:13.5px}
 
 </style>
 </head>
@@ -1685,8 +1686,8 @@ function observeRv(el, delay) {
    Visitors read the gallery anonymously and can send a lead;
    only e-mails listed in the `admins` table may change anything.
    ========================================================= */
-const SB_URL = "__SB_URL__";
-const SB_KEY = "__SB_KEY__";
+const SB_URL = "https://pvsdgvzdjcgyydvkkcea.supabase.co";
+const SB_KEY = "sb_publishable_cyIbOLIgj9SCiWAXtNoTgQ_MvdmZbUZ";
 const SB_BUCKET = 'media';
 const assetUrl = (p) => (!p ? '' : /^(https?:|data:|blob:)/.test(p) ? p : SB_URL + '/storage/v1/object/public/' + SB_BUCKET + '/' + p);
 
@@ -1775,7 +1776,7 @@ const API = {
   signOut: async () => { try { await S.sb.auth.signOut(); } catch (e) { /* ignore */ } location.replace(location.pathname); }
 };
 
-/* ---------- admin sign-in (one-time code by e-mail) ---------- */
+/* ---------- admin sign-in (one-time link by e-mail) ---------- */
 function loginHTML() {
   return '<div class="login__scrim" data-login-close></div>' +
     '<section class="login__card" role="dialog" aria-modal="true" aria-labelledby="login-t">' +
@@ -1783,16 +1784,15 @@ function loginHTML() {
       '<span class="login__logo"><span class="mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 3 7.17 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.17L15 3H9Zm3 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10Z"/></svg><i></i><i></i><i></i></span></span>' +
       '<h2 id="login-t">כניסה לניהול האתר</h2>' +
       '<form class="login__f" id="login-f1" novalidate>' +
-        '<p class="login__p">נשלח אליך קוד כניסה חד-פעמי לאימייל.</p>' +
+        '<p class="login__p">נשלח אליך מייל עם קישור כניסה חד-פעמי.</p>' +
         '<label class="ad-fld"><span>כתובת האימייל של המנהלת</span><input id="login-email" type="email" autocomplete="email" dir="ltr" required></label>' +
-        '<button class="dbtn dbtn--solid" type="submit"><span class="dbtn__label">שליחת קוד</span><span class="dbtn__icon">' + ICON.arrow + '</span></button>' +
+        '<button class="dbtn dbtn--solid" type="submit"><span class="dbtn__label">שליחת קישור כניסה</span><span class="dbtn__icon">' + ICON.arrow + '</span></button>' +
       '</form>' +
-      '<form class="login__f" id="login-f2" novalidate hidden>' +
-        '<p class="login__p">שלחנו קוד ל-<b id="login-to" dir="ltr"></b>. אפשר להקליד אותו כאן, או ללחוץ על הקישור שבמייל.</p>' +
-        '<label class="ad-fld"><span>הקוד מהמייל</span><input id="login-code" inputmode="numeric" autocomplete="one-time-code" dir="ltr" maxlength="10" required></label>' +
-        '<button class="dbtn dbtn--solid" type="submit"><span class="dbtn__label">כניסה</span><span class="dbtn__icon">' + ICON.check + '</span></button>' +
+      '<div class="login__f" id="login-f2" hidden>' +
+        '<p class="login__p">שלחנו מייל ל-<b id="login-to" dir="ltr"></b> עם קישור כניסה. פתחי את המייל ולחצי על הקישור, והאתר ייפתח כשאת מחוברת לניהול.</p>' +
+        '<p class="login__p login__hint">המייל מגיע מ-Supabase, לפעמים אחרי דקה. אם הוא לא מופיע, כדאי לבדוק גם בתיקיית הספאם.</p>' +
         '<button type="button" class="tlink" id="login-back">שינוי כתובת או שליחה מחדש</button>' +
-      '</form>' +
+      '</div>' +
       '<p class="login__note" id="login-note" role="status" aria-live="polite"></p>' +
     '</section>';
 }
@@ -1814,23 +1814,14 @@ function openLogin() {
       e.preventDefault();
       const email = $('#login-email', box).value.trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { say('נא לכתוב כתובת אימייל תקינה.', true); return; }
-      say('שולחים קוד…');
+      say('שולחים…');
       const res = await S.sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true, emailRedirectTo: location.origin + location.pathname } });
-      if (res.error) { say(res.error.status === 429 ? 'נשלחו יותר מדי קודים. נסי שוב בעוד כמה דקות.' : 'לא הצלחנו לשלוח קוד. נסי שוב.', true); return; }
+      if (res.error) { say(res.error.status === 429 ? 'נשלחו יותר מדי מיילים בשעה האחרונה. נסי שוב מאוחר יותר.' : 'לא הצלחנו לשלוח את המייל. נסי שוב.', true); return; }
       $('#login-to', box).textContent = email;
       $('#login-f1', box).hidden = true;
       $('#login-f2', box).hidden = false;
       say('');
-      $('#login-code', box).focus();
-    });
-    $('#login-f2', box).addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const token = $('#login-code', box).value.replace(/\s/g, '');
-      if (token.length < 6) { say('הקוד קצר מדי. בדקי שהעתקת את כולו.', true); return; }
-      say('בודקים…');
-      const res = await S.sb.auth.verifyOtp({ email: $('#login-email', box).value.trim(), token, type: 'email' });
-      if (res.error) { say('הקוד לא נכון או שפג תוקפו. אפשר לבקש קוד חדש.', true); return; }
-      say('');
+      $('#login-back', box).focus();
     });
     $('#login-back', box).addEventListener('click', () => { $('#login-f2', box).hidden = true; $('#login-f1', box).hidden = false; say(''); $('#login-email', box).focus(); });
   }
