@@ -18,7 +18,9 @@ jobs:
         env:
           SB_URL: https://pvsdgvzdjcgyydvkkcea.supabase.co
           SB_KEY: sb_publishable_cyIbOLIgj9SCiWAXtNoTgQ_MvdmZbUZ
-        run: curl -fsS "$SB_URL/rest/v1/faq?select=id&limit=1" -H "apikey: $SB_KEY" -o /dev/null && echo "database is awake"
+        run: |
+          curl -fsS "$SB_URL/rest/v1/faq?select=id&limit=1" -H "apikey: $SB_KEY" -o /dev/null
+          echo "database is awake"
       - name: Check out (monthly)
         if: github.event.schedule == '41 6 1 * *'
         uses: actions/checkout@v4
